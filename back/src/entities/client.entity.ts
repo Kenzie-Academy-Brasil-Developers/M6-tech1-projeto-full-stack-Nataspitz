@@ -1,5 +1,7 @@
-import { BeforeInsert, Column, PrimaryGeneratedColumn } from "typeorm"
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Contact } from "./contacts.entity"
 
+@Entity()
 export class Client{
     @PrimaryGeneratedColumn("uuid")
     id: number
@@ -23,4 +25,7 @@ export class Client{
     setCreatedAt(){
         this.createdAt = new Date()
     }
+
+    @OneToMany(() => Contact, contact => contact.client)
+    contacts: Contact[]
 }
