@@ -1,0 +1,114 @@
+Abaixo está o código necessário para realizar testes unitários, considerando que um cliente pode ter vários contatos e esses contatos podem ter vários e-mails, utilizando Jest.
+
+// clientCreate.service.spec.js
+const { DataSource } = require('typeorm');
+const { AppDataSource } = require('../../data-source');
+const clientCreateService = require('../../services/client/clientCreate.service');
+
+describe("Create a client", () => {
+  let connection;
+
+  beforeAll(async () => {
+    connection = await AppDataSource.initialize().catch((err) => {
+      console.error("Error during Data Source initialization", err);
+    });
+  });
+
+  afterAll(async () => {
+    await connection.destroy();
+  });
+
+  test("Should insert the information of the new client in the database", async () => {
+    const clientData = {
+      fullName: "John Doe",
+      email: "john.doe@example.com",
+      password: "secure123",
+      phone: "12345678901",
+    };
+
+    const newClient = await clientCreateService(clientData);
+
+    expect(newClient).toEqual(expect.objectContaining({
+      id: expect.any(String),
+      fullName: clientData.fullName,
+      email: clientData.email,
+      phone: clientData.phone,
+    }));
+  });
+});
+
+// contactCreate.service.spec.js
+const contactCreateService = require('../../services/contact/contactCreate.service');
+
+describe("Create a contact for a client", () => {
+  let connection;
+
+  beforeAll(async () => {
+    connection = await AppDataSource.initialize().catch((err) => {
+      console.error("Error during Data Source initialization", err);
+    });
+  });
+
+  afterAll(async () => {
+    await connection.destroy();
+  });
+
+  test("Should insert the information of the new contact in the database and relate it to a client", async () => {
+    // Suppose we have a predefined client id
+    const clientId = 'predefined-client-uuid';
+
+    const contactData = {
+      name: "Jane Doe",
+      phone: "10987654321",
+      clientId,
+    };
+
+    const newContact = await contactCreateService(contactData);
+
+    expect(newContact).toEqual(expect.objectContaining({
+      id: expect.any(String),
+      name: contactData.name,
+      phone: contactData.phone,
+      client: expect.objectContaining({ id: clientId }),
+    }));
+  });
+});
+
+// emailContactCreate.service.spec.js
+const emailContactCreateService = require('../../services/emailContact/emailContactCreate.service');
+
+describe("Create an email contact for a contact", () => {
+  let connection;
+
+  beforeAll(async () => {
+    connection = await AppDataSource.initialize().catch((err) => {
+      console.error("Error during Data Source initialization", err);
+    });
+  });
+
+  afterAll(async () => {
+    await connection.destroy();
+  });
+
+  test("Should insert the email of the contact in the database and relate it to a contact", async () => {
+    // Suppose we have a predefined contact id
+    const contactId = 'predefined-contact-uuid';
+
+    const emailContactData = {
+      email: "jane.doe@example.com",
+      contactId,
+    };
+
+    const newEmailContact = await emailContactCreateService(emailContactData);
+
+    expect(newEmailContact).toEqual(expect.objectContaining({
+      id: expect.any(String),
+      email: emailContactData.email,
+      contact: expect.objectContaining({ id: contactId }),
+    }));
+  });
+});
+
+Certifique-se de que as funções `clientCreateService`, `contactCreateService` e `emailContactCreateService` estão definidas e exportadas em seus respectivos módulos de serviços (`services/client/clientCreate.service.js`, `services/contact/contactCreate.service.js`, `services/emailContact/emailContactCreate.service.js`) e que os modelos de entidades correspondem a esses serviços. Além disso, adapte os detalhes conforme necessário, como os caminhos dos imports e as propriedades específicas do seu esquema de banco de dados.
+
+Este código é um exemplo básico e pode precisar de ajustes para se integrar com a estrutura do seu projeto. Além disso, antes de execução dos testes, é necessário criar os serviços e métodos correspondentes, configurar fonte de dados e adaptar a lógica conforme o esquema da sua base de dados.
