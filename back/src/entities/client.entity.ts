@@ -4,7 +4,7 @@ import { Contact } from "./contacts.entity"
 @Entity()
 export class Client{
     @PrimaryGeneratedColumn("uuid")
-    id: number
+    id: string
 
     @Column({length: 30})
     fullName: string
