@@ -16,6 +16,14 @@ export const handleErrors  = (err: unknown, req: Request, res: Response, next: N
         return res.status(401).json({ message: err.message });
     }
 
+    if (typeof err === 'object' && err !== null && 'message' in err && typeof err.message === 'string') {
+        const message: string = err.message;
+        const uuidInvalidSyntaxPattern = /invalid input syntax for type uuid/;
+        if (uuidInvalidSyntaxPattern.test(message)) {
+            return res.status(400).json({ message: "Invalid UUID syntax" });
+        }
+    }
+
     console.error(err)
     return res.status(500).json({error: "Internal Server Error "})
 }

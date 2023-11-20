@@ -10,6 +10,6 @@ export const notFoundClient = async (req: Request, res: Response, next: NextFunc
         
     if(!client) throw new AppError("Client not found", 404)
 
-    res.locals.client = { client, ...res.locals}
+    res.locals = {...res.locals, client}
     return next()
 }

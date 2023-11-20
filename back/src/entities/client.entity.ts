@@ -6,13 +6,13 @@ export class Client{
     @PrimaryGeneratedColumn("uuid")
     id: string
 
-    @Column({length: 30})
+    @Column({length: 50})
     fullName: string
 
     @Column({unique: true})
     email: string
 
-    @Column({length: 15})
+    @Column({length: 150})
     password: string
 
     @Column({length: 11, unique: true})
