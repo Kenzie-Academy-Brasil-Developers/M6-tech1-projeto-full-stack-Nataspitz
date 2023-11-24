@@ -1,27 +1,29 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { Client } from "./client.entity"
-import { EmailContact } from "./emailContact.entity"
+import { BeforeInsert, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Client } from "./client.entity";
+import { EmailContact } from "./emailContact.entity";
 
 @Entity()
-export class Contact{
+export class Contact {
     @PrimaryGeneratedColumn("uuid")
-    id: number
+    id: string;
 
-    @Column({unique: true})
-    name: string
+    @Column({ length: 50 })
+    name: string;
 
-    @Column({unique: true})
-    phone: string
+    @Column({ length: 11, unique: true })
+    phone: string;
 
     @Column()
-    createdAt: Date
-    setCreatedAt(){
-        this.createdAt = new Date()
+    createdAt: Date;
+
+    @BeforeInsert()
+    setCreatedAt() {
+        this.createdAt = new Date();
     }
 
     @ManyToOne(() => Client, client => client.contacts)
-    client: Client
+    client: Client;
 
-    @OneToMany(() => EmailContact, emailContact => emailContact.contact)
-    emailContacts: EmailContact[]
+    @OneToMany(() => EmailContact, emailContact => emailContact.contact, { cascade: true, onDelete: "CASCADE" })
+    emailContacts: EmailContact[];
 }

@@ -1,31 +1,31 @@
-import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { Contact } from "./contacts.entity"
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Contact } from "./contacts.entity";
 
 @Entity()
-export class Client{
+export class Client {
     @PrimaryGeneratedColumn("uuid")
-    id: string
+    id: string;
 
-    @Column({length: 50})
-    fullName: string
+    @Column({ length: 50 })
+    fullName: string;
 
-    @Column({unique: true})
-    email: string
+    @Column({ unique: true })
+    email: string;
 
-    @Column({length: 150})
-    password: string
+    @Column({ length: 150 })
+    password: string;
 
-    @Column({length: 11, unique: true})
-    phone: string
+    @Column({ length: 11, unique: true })
+    phone: string;
 
     @Column()
-    createdAt: Date
+    createdAt: Date;
+
+    @OneToMany(() => Contact, contact => contact.client, { cascade: true, onDelete: "CASCADE" }) 
+    contacts: Contact[];
 
     @BeforeInsert()
-    setCreatedAt(){
-        this.createdAt = new Date()
+    setCreatedAt() {
+        this.createdAt = new Date();
     }
-
-    @OneToMany(() => Contact, contact => contact.client)
-    contacts: Contact[]
 }

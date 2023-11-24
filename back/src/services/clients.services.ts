@@ -1,4 +1,4 @@
-import { clientRepo } from './../repositories';
+import { clientRepo, contactsRepo } from './../repositories';
 import { AppError } from "../errors/AppError";
 import { IclientLoginResponse, TLoginClient, TNewClient, TResponseClient, TUpdateClient } from "../interfaces/clients.interfaces";
 import { compare, hash } from 'bcryptjs'
@@ -13,8 +13,7 @@ export class ClientServices{
 
         const client: TResponseClient | null = await clientRepo.findOne({
             where: {
-                email, 
-                phone
+                email
             }
         })
 
@@ -63,7 +62,7 @@ export class ClientServices{
         
     }
 
-    async update( currentClient: TUpdateClient,  payload: TUpdateClient, ) {
+    async update( currentClient: Client,  payload: TUpdateClient, ) {
         
         const updateClient = clientRepo.create({
             ...currentClient,
@@ -74,7 +73,7 @@ export class ClientServices{
         return updateClientSchema.parse(updateClient)
     }
 
-    async delete (client: Client): Promise<void> {
-        await clientRepo.remove(client)
+    async delete(client: Client) {
+        await clientRepo.remove(client);
     }
 }

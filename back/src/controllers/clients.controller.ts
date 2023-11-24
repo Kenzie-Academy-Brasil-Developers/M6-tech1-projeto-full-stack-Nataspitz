@@ -29,7 +29,6 @@ export class ClientsController{
 
     async update(req: Request, res: Response) {
         const { client } = res.locals
-        console.log(client, "log client");
         
         const updatedClient = await this.clientServices.update(
             client,

@@ -5,4 +5,4 @@ import { Contact } from "./entities/contacts.entity";
 
 export const clientRepo = AppDataSource.getRepository(Client)
 export const contactsRepo = AppDataSource.getRepository(Contact)
-export const emailContact = AppDataSource.getRepository(EmailContact)
+export const emailContactRepo = AppDataSource.getRepository(EmailContact)
