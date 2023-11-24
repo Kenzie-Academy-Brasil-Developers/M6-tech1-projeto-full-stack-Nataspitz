@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { clientRepo, contactsRepo } from "../../repositories";
+import { contactsRepo } from "../../repositories";
 import { AppError } from "../../errors/AppError";
 
 

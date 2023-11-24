@@ -31,9 +31,8 @@ export class ContactController {
 
     async update (req: Request, res: Response) {
         const { contact } = res.locals
-        const { sub } = res.locals.decoded
         
-        const updatedContact = await this.contactService.update(contact, req.body, sub)
+        const updatedContact = await this.contactService.update(contact, req.body)
         return res.status(200).json(updatedContact)
     }
 

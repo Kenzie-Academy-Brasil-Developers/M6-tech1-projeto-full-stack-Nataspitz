@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { EmailContactServices } from "../services/emailContact.services";
+import { EmailContactServices } from "../services/emailContacts.services";
 
 
 export class EmailComtactController {
@@ -7,10 +7,27 @@ export class EmailComtactController {
 
     async create (req: Request, res: Response) {
         const { email } = req.body
-        const { id } = req.params
-
-        const newEmail = await this.contactService.create(email, id)
-
+        const { contact } = res.locals
+        console.log(email, "emailController");
+        console.log(contact, "contact");
+        
+        const newEmail = await this.contactService.create(email, contact)
         return res.status(201).json(newEmail)
+    }
+
+    async update (req: Request, res: Response) {
+        const { email } = res.locals
+
+        const updatedEmail = await this.contactService.update(email, req.body)
+        return res.status(200).json(updatedEmail)
+    }
+
+    async delete (req: Request, res: Response) {
+        const { email } = res.locals
+        console.log(email, "emailController");
+        
+
+        await this.contactService.delete(email)
+        return res.status(204).send()
     }
 }

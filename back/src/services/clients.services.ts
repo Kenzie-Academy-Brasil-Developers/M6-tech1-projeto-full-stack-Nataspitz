@@ -11,13 +11,12 @@ export class ClientServices{
     async create(payload: TNewClient): Promise<TResponseClient> {
         const { fullName, email, password, phone } = payload
 
-        const client: TResponseClient | null = await clientRepo.findOne({
-            where: {
-                email
-            }
-        })
+        const clientEmail: TResponseClient | null = await clientRepo.findOneBy({email})
+        const clientPhone: TResponseClient | null = await clientRepo.findOneBy({phone})
 
-        if (client) throw new AppError("Client already exists", 409)
+        if (clientEmail) throw new AppError("Client already exists", 409)
+        if (clientPhone) throw new AppError("Client already exists", 409)
+        
         const hashPassword = await hash(password, 10)
 
         const newClient = clientRepo.create({

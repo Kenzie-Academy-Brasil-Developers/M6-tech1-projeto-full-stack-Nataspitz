@@ -1,10 +1,9 @@
-import { contactController } from './../controllers/index';
 import { contactSchema, updateContactSchema } from './../schemas/contacts.schemas';
-import { TContactResponse, TNewContact, TNewEmailContact, TUpdateContact } from "../interfaces/contacts.interfaces";
+import { TContactResponse, TNewContact, TUpdateContact } from "../interfaces/contacts.interfaces";
+import { TNewEmailContact } from '../interfaces/emailContacts.interface';
 import { contactsRepo, emailContactRepo } from "../repositories";
 import { AppError } from '../errors/AppError';
 import { Contact } from '../entities/contacts.entity';
-import { updateClientSchema } from '../schemas/client.schemas';
 
 
 export class ContactServices{
@@ -79,7 +78,7 @@ export class ContactServices{
         return findContact
     }
 
-    async update (contact: Contact, payload: TUpdateContact, clientId: string) {
+    async update (contact: Contact, payload: TUpdateContact) {
 
 
         const updateContact = contactsRepo.create({
@@ -87,11 +86,20 @@ export class ContactServices{
             ...payload
         })
 
-        await contactsRepo.save(updateContact)
-        return updateContactSchema.parse(updateContact)
+        return await contactsRepo.save(updateContact)
     }
 
     async delete (contact: Contact) {
+        const emails = await emailContactRepo.find({
+            where: {
+                contact: contact.emailContacts
+            }
+        })
+
+        if (emails) {
+            await emailContactRepo.remove(emails)
+        }
+
         await contactsRepo.remove(contact)
     }
 }

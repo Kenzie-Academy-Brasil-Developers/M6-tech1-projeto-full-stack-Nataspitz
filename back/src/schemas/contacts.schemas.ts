@@ -1,9 +1,6 @@
 import { z } from "zod";
+import { emailContactSchema, newEmailContactSchema } from "./emailContacts.schemas";
 
-const emailContactSchema = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
-});
 
 export const contactSchema = z.object({
   id: z.string().uuid(),
@@ -13,7 +10,6 @@ export const contactSchema = z.object({
   emails: z.array(emailContactSchema),
 })
 
-export const newEmailContactSchema = emailContactSchema.omit({ id: true });
 export const newContactSchema = contactSchema
   .omit({ id: true, createdAt: true, emails: true })
   .extend({

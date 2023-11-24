@@ -1,6 +1,6 @@
 import { ClientServices } from "../services/clients.services";
 import { ContactServices } from "../services/contacts.services";
-import { EmailContactServices } from "../services/emailContact.services";
+import { EmailContactServices } from "../services/emailContacts.services";
 import { ClientsController } from "./clients.controller";
 import { ContactController } from "./contacts.controller";
 import { EmailComtactController } from "./emailContacts.controller";

@@ -7,7 +7,7 @@ export class Contact {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column({ length: 50 })
+    @Column({ length: 50, unique: true })
     name: string;
 
     @Column({ length: 11, unique: true })

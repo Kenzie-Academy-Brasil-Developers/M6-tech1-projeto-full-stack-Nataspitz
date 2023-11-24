@@ -1,16 +1,20 @@
 import { NextFunction, Request, Response } from "express";
-import { clientRepo } from "../../repositories";
 import { AppError } from "../../errors/AppError";
+import { emailContactRepo } from "../../repositories";
 
 
 export const emailExists = async (req: Request, res: Response, next: NextFunction) =>{
     const { email } = req.body
+    
+    const emailContact = await emailContactRepo.findOne({
+        where: {
+            email
+        }
+    })
 
-    const contact = await clientRepo.findOneBy({ email })
-
-    if(contact) {
+    if(emailContact) {
         throw new AppError("Email already registered", 409)
     }
 
-    return 
+    return next()
 }
