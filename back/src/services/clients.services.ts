@@ -1,4 +1,4 @@
-import { clientRepo, contactsRepo } from './../repositories';
+import { clientRepo, contactsRepo, emailContactRepo } from './../repositories';
 import { AppError } from "../errors/AppError";
 import { IclientLoginResponse, TLoginClient, TNewClient, TResponseClient, TUpdateClient } from "../interfaces/clients.interfaces";
 import { compare, hash } from 'bcryptjs'
@@ -16,7 +16,7 @@ export class ClientServices{
 
         if (clientEmail) throw new AppError("Client already exists", 409)
         if (clientPhone) throw new AppError("Client already exists", 409)
-        
+
         const hashPassword = await hash(password, 10)
 
         const newClient = clientRepo.create({
@@ -73,6 +73,25 @@ export class ClientServices{
     }
 
     async delete(client: Client) {
+        const contacts = await contactsRepo.find({
+            where: {
+                client: {
+                    id: client.id
+                }
+            }
+        })
+
+        for (const contact of contacts) {
+            await emailContactRepo.delete({
+              contact: {
+                id: contact.id,
+              },
+            })
+          }
+
+        if (contacts) {
+            await contactsRepo.remove(contacts)
+        }
         await clientRepo.remove(client);
     }
 }

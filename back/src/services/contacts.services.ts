@@ -10,14 +10,6 @@ export class ContactServices{
     async create (payload: TNewContact, clientId: string): Promise<TContactResponse> {
         const { name, emails, phone, } = payload
 
-        const phoneExists = await contactsRepo.findOneBy({
-            phone: phone
-        })
-        
-        if (phoneExists) {
-            throw new AppError("Phone already registered", 409)
-        }
-
         const newContact = contactsRepo.create({
             name,
             phone,
@@ -27,12 +19,6 @@ export class ContactServices{
 
         const createdEmails = await Promise.all(emails.map(async (emailPayload: TNewEmailContact) => {
             const { email } = emailPayload
-
-            const emailExists = await emailContactRepo.findOneBy({
-                email
-            })
-
-            if (emailExists) throw new AppError("Email already registered", 409)
 
             const createdEmail = emailContactRepo.create({
                 email,
@@ -53,7 +39,11 @@ export class ContactServices{
         return contactSchema.parse(response)
     }
 
-    async getAll(clientId: string) {    
+    async getAll(clientId: string, name?: string) {
+        let whereConditions: any = {
+            client: { id: clientId }
+        }    
+        
         const contacts = await contactsRepo.find({
             where: {
                 client: { id: clientId }

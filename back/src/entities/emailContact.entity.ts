@@ -6,7 +6,7 @@ export class EmailContact{
     @PrimaryGeneratedColumn("uuid")
     id: string
 
-    @Column({unique: true})
+    @Column()
     email: string
 
     @ManyToOne(type => Contact, contact => contact.emailContacts)

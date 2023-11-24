@@ -8,8 +8,6 @@ export class EmailComtactController {
     async create (req: Request, res: Response) {
         const { email } = req.body
         const { contact } = res.locals
-        console.log(email, "emailController");
-        console.log(contact, "contact");
         
         const newEmail = await this.contactService.create(email, contact)
         return res.status(201).json(newEmail)
