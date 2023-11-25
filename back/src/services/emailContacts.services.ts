@@ -19,10 +19,10 @@ export class EmailContactServices {
         return emailContactSchema.parse(createdEmail)
     }
 
-    async update (email: string, payload: TUpdateEmailContact): Promise<TEmailContactResponse> {
+    async update (currentEmail: EmailContact, payload: TUpdateEmailContact): Promise<TEmailContactResponse> {
 
         const updateEmail = emailContactRepo.create({
-            email,
+            ...currentEmail,
             ...payload
         })
 

@@ -5,10 +5,8 @@ import { AppError } from "../../errors/AppError";
 
 export const notFoundEmail = async (req: Request, res: Response, next: NextFunction) => {
     
-    const email = await emailContactRepo.findOne({
-        where: {
-            email: req.params.email
-        }
+    const email = await emailContactRepo.findOneBy({
+        id: req.params.id
     })
 
     if (!email) {
