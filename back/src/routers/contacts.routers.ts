@@ -4,17 +4,15 @@ import { validateBody } from "../middlewares/validateBody.middleware";
 import { newContactSchema } from "../schemas/contacts.schemas";
 import { contactController, emailContactController } from '../controllers';
 import { verifyToken } from '../middlewares/authentication/verifyToken.middleware';
-import { emailExists } from '../middlewares/contacts/emailExists.middleware';
 import { newEmailContactSchema } from '../schemas/emailContacts.schemas';
 import { notFoundContact } from '../middlewares/contacts/notFoundContacts.middleware';
-import { phoneContactExists } from '../middlewares/contacts/phoneContactExists.middleware';
 
 export const contactsRouter: Router = Router()
 
 contactsRouter.use(verifyToken)
-contactsRouter.post("/", validateBody(newContactSchema), phoneContactExists, (req, res) => {contactController.create(req, res)})
+contactsRouter.post("/", validateBody(newContactSchema), (req, res) => {contactController.create(req, res)})
 contactsRouter.get("/", (req, res) => {contactController.getAll(req, res)})
-contactsRouter.post("/:id/email", notFoundContact, validateBody(newEmailContactSchema), emailExists, (req, res) => {emailContactController.create(req, res)})
+contactsRouter.post("/:id/email", notFoundContact, validateBody(newEmailContactSchema), (req, res) => {emailContactController.create(req, res)})
 
 contactsRouter.use("/:id", notFoundContact)
 contactsRouter.get("/:id", (req, res) => {contactController.getById(req, res)})

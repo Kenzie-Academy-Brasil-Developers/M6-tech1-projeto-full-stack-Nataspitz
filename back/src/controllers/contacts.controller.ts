@@ -16,8 +16,9 @@ export class ContactController {
 
     async getAll (req: Request, res: Response) {
         const { sub } = res.locals.decoded
+        const name = req.query.name as string | undefined
 
-        const contacts = await this.contactService.getAll(sub)
+        const contacts = await this.contactService.getAll(sub, name)
         return res.status(200).json(contacts)        
     }
 

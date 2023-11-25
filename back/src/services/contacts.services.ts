@@ -2,8 +2,8 @@ import { contactSchema, updateContactSchema } from './../schemas/contacts.schema
 import { TContactResponse, TNewContact, TUpdateContact } from "../interfaces/contacts.interfaces";
 import { TNewEmailContact } from '../interfaces/emailContacts.interface';
 import { contactsRepo, emailContactRepo } from "../repositories";
-import { AppError } from '../errors/AppError';
 import { Contact } from '../entities/contacts.entity';
+import { ILike } from 'typeorm';
 
 
 export class ContactServices{
@@ -42,13 +42,21 @@ export class ContactServices{
     async getAll(clientId: string, name?: string) {
         let whereConditions: any = {
             client: { id: clientId }
-        }    
+        }
         
-        const contacts = await contactsRepo.find({
-            where: {
-                client: { id: clientId }
-            }
-        })
+        if (name) {
+            whereConditions.name = ILike(`%${name}%`);
+          }
+        
+          const contacts = await contactsRepo.find({
+            where: whereConditions,
+          });
+        
+        // const contacts = await contactsRepo.find({
+        //     where: {
+        //         client: { id: clientId }
+        //     }
+        // })
 
         return contacts
 
