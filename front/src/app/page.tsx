@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import { Footer } from '../components/footer/Footer'
-import { ContainerMain } from '../components/containerMain/ContainerMain'
+import { ContainerMain } from '../components/containers/containerMain/ContainerMain'
 import logo from '../assets/imgs/Logo.png'
 import { GlobalStyles } from '../styles/GlobalStyle'
 import { ListHome } from '../components/lists/listHomePage/ListHome'
@@ -19,11 +19,7 @@ export default function Home() {
   return (
     <>
       <GlobalStyles />
-      <Header>
-        <ContainerMain>
-          <Image src={logo} alt="Foto da logo" />
-        </ContainerMain>
-      </Header>
+      <Header />
       <main>
         <ContainerMain>
           <div className='animation__home'>
@@ -38,7 +34,7 @@ export default function Home() {
           </div>
         </ContainerMain>
       </main>
-      <Footer/>
+      <Footer/> 
     </>
   )
 }

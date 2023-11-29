@@ -1,4 +1,4 @@
-import { ContainerMain } from '../containerMain/ContainerMain';
+import { ContainerMain } from '../containers/containerMain/ContainerMain';
 import { StyleFooter } from './StyleFooter';
 
 

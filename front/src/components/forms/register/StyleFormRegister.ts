@@ -7,7 +7,7 @@ export const StyleFormRegister = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   min-width: 200px; 
   display: flex;
   flex-direction: column;
@@ -54,7 +54,6 @@ export const StyleFormRegister = styled.div`
       margin: 10px auto;
       height: 30px;
       width: 160px;
-      
       color: var(--grey-100);
       font-weight: 500;
       background-color: var(--brand-1);

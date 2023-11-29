@@ -8,7 +8,7 @@ export const StyleFormLogin = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   min-width: 200px; 
   display: flex;
   flex-direction: column;
@@ -46,6 +46,20 @@ export const StyleFormLogin = styled.div`
 
     input:focus {
       border: 2px solid var(--brand-1-hover);
+    }
+
+    .passwordView{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+      height: 20px;
+
+      label{
+        font-size: var(--font-size-small);
+        padding-bottom: 15px;
+      }
+
     }
 
     button {
