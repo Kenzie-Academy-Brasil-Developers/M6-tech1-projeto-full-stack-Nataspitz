@@ -4,7 +4,7 @@ import { api } from "../../../service/api"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 import { TRegisterFormSchema } from "@/components/forms/register/schemaRegister"
-import { IClientsContext, IUpdateClient } from "./interfaces"
+import { IClient, IClientsContext, IUpdateClient } from "./interfaces"
 import { TFormLoginSchema } from "@/components/forms/login/schemaFormLogin"
 
 
@@ -14,6 +14,7 @@ export const ClientsContext = createContext<IClientsContext>(
 
 export function ClientsProvider({ children }: {children: React.ReactNode }) {   
     const [loginRender, setLoginRender] = useState(false)
+    const [client, setClient] = useState<IClient | null>(null)
 
     const token = localStorage.getItem("@TOKEN")
     const clientId = localStorage.getItem("@USERID")
@@ -35,6 +36,9 @@ export function ClientsProvider({ children }: {children: React.ReactNode }) {
         try {
             const { data } = await api.post("/clients/login", form)
             const clientId = data.id
+            setClient(data)
+            console.log(data)
+            console.log(client)            
             localStorage.setItem("@USERID", clientId)
             localStorage.setItem("@TOKEN", data.token)
         } catch (error) {
@@ -46,11 +50,12 @@ export function ClientsProvider({ children }: {children: React.ReactNode }) {
 
     const updateClient = async (form: IUpdateClient) => {
         try {
-            await api.patch(`/clients/${clientId}`, form, {
+            const { data } = await api.patch(`/clients/${clientId}`, form, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
+            setClient(data)
             toast.success("Dados atualizados!")
         } catch (error) {
             toast.error("Ops algo deu errado, tente novamente!")
@@ -76,7 +81,8 @@ export function ClientsProvider({ children }: {children: React.ReactNode }) {
         registerClient,
         loginClient,
         updateClient,
-        deleteClient
+        deleteClient,
+        client
       }
 
     return (

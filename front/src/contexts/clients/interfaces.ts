@@ -9,7 +9,15 @@ export interface IClientsContext {
     setLoginRender: React.Dispatch<React.SetStateAction<boolean>>;
     loginClient: (form: TFormLoginSchema) => Promise<void>;
     updateClient: (form: IUpdateClient) => Promise<void>;
-    deleteClient: () => Promise<void>
+    deleteClient: () => Promise<void>;
+    client: IClient | null;
+}
+
+export interface IClient {
+    id: string;
+    fullName: string;
+    email: string;
+    phone: string;
 }
 
 export interface IUpdateClient {

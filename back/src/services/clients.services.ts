@@ -57,7 +57,6 @@ export class ClientServices{
             fullName: client.fullName,
             email: client.email,
             phone: client.phone,
-            createdAt: client.createdAt,  
             token
         }
         return clientResponse

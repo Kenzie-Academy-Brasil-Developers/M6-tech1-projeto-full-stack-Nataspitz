@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Input } from '../../fragments/Input';
-import { StyleFormLogin } from './StyleFormLogin';
+import { StyleForms } from '../StyleForms';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TFormLoginSchema, formLoginSchema } from './schemaFormLogin';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ClientsContext } from '@/contexts/clients/clientsContext';
 import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation'; 
 
 
 interface IPropFormLogin {
@@ -16,7 +17,7 @@ interface IPropFormLogin {
 export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
     const { loginClient } = useContext(ClientsContext);
     const [showPassword, setShowPassword] = useState(false)
-    const routerForDashboard = useNavigate()
+    const routerForDashboard = useRouter()
 
 
     const renderRegister = () => {
@@ -28,12 +29,12 @@ export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
         resolver: zodResolver(formLoginSchema),
     })
     const loginSubmit: SubmitHandler<TFormLoginSchema> = (data) => {
-        routerForDashboard('/clients')
         loginClient(data)
+        routerForDashboard.push("/clients")
     }
 
     return (
-        <StyleFormLogin>
+        <StyleForms>
             <h3>Faça o seu login</h3>
             <form onSubmit={handleSubmit(loginSubmit)}>
                 <Input type="email" placeholder="Email" label="Email"  error={errors.email} {...register("email")}/>
@@ -47,7 +48,7 @@ export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
                 <p className="login__register--text">Ainda não possui uma conta?</p>
                 <p className="login__register--link" onClick={renderRegister}>Clique aqui</p>
             </div>
-        </StyleFormLogin>
+        </StyleForms>
     )
     
 }

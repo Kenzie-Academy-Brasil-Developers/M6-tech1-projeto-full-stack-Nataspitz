@@ -1,10 +1,10 @@
 import { Input } from "@/components/fragments/Input";
 import { Dispatch, SetStateAction, useContext } from "react";
-import { StyleFormRegister } from "./StyleFormRegister";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TRegisterFormSchema, registerFormRegisterSchema } from "./schemaRegister";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClientsContext } from "@/contexts/clients/clientsContext";
+import { StyleForms } from "../StyleForms";
 
 interface IPropsFormRegister {
     setLoginRender: Dispatch<SetStateAction<boolean>>;
@@ -27,7 +27,7 @@ export function FormRegister({setLoginRender, setRegisterRender}: IPropsFormRegi
         renderLogin()
     }
     return (
-        <StyleFormRegister>
+        <StyleForms>
             <h3>Faça o seu registro</h3>
             <form onSubmit={handleSubmit(registerSubmit)}>
                 <Input type="text" placeholder="Digite seu nome" label="Nome Completo" error={errors.fullName} {...register("fullName")}/>
@@ -41,6 +41,6 @@ export function FormRegister({setLoginRender, setRegisterRender}: IPropsFormRegi
                 <p className="register__login--text">Já possui uma conta?</p>
                 <p className="register__login--link" onClick={renderLogin}>Clique aqui</p>
             </div>
-        </StyleFormRegister>
+        </StyleForms>
     )
 }

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const StyleFormRegister = styled.div`
+export const StyleForms = styled.div`
   background-color: var(--grey-200);
   box-shadow: 0 2px 10px 0 var(--grey-400);
   border-radius: 5px;
@@ -47,6 +47,20 @@ export const StyleFormRegister = styled.div`
       border: 2px solid var(--brand-1-hover);
     }
 
+    .passwordView{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+      height: 20px;
+
+      label{
+        font-size: var(--font-size-small);
+        padding-bottom: 15px;
+      }
+
+    }
+
     button {
       border: none;
       border-radius: 3px;
@@ -67,6 +81,22 @@ export const StyleFormRegister = styled.div`
 
 }
 
+.login__register{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .login__register--text{
+        font-size: var(--font-size-small);
+    }
+
+    .login__register--link{
+        cursor: pointer;
+        font-size: var(--font-size-small);
+        color: var(--brand-1);
+    }
+}
+
 .register__login{
     display: flex;
     flex-direction: column;
@@ -84,6 +114,11 @@ export const StyleFormRegister = styled.div`
 }
 
 @media (min-width: 768px) {
+    .login__register{
+        display: flex;
+        flex-direction: row;
+    }
+
     .register__login{
         display: flex;
         flex-direction: row;
