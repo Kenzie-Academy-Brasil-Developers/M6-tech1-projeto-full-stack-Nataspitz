@@ -55,6 +55,9 @@ export class ClientServices{
         const clientResponse = {
             id: client.id,
             fullName: client.fullName,
+            email: client.email,
+            phone: client.phone,
+            createdAt: client.createdAt,  
             token
         }
         return clientResponse
