@@ -5,20 +5,21 @@ import { ContainerMain } from '../components/containers/containerMain/ContainerM
 import logo from '../assets/imgs/Logo.png'
 import { GlobalStyles } from '../styles/GlobalStyle'
 import { ListHome } from '../components/lists/listHomePage/ListHome'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormRegister } from '@/components/forms/register/FormRegister'
 import { Header } from '@/components/header/Header'
 import { FormLogin } from '@/components/forms/login/FormLogin'
-import { ContainerUpAnimation } from '@/components/animations/upDownAnimation/ContainerUpAnimation'
-import { ContainerDownAnimation } from '@/components/animations/upDownAnimation/ContainerDownAnimation'
+import { ClientsContext } from '@/contexts/clients/clientsContext'
+import { BrowserRouter } from 'react-router-dom'
 
 export default function Home() {
   const [registerRender, setRegisterRender] = useState(false)
-  const [loginRender, setLoginRender] = useState(false)
+  const { loginRender, setLoginRender } = useContext(ClientsContext)
 
   return (
     <>
       <GlobalStyles />
+      <BrowserRouter>
       <Header />
       <main>
         <ContainerMain>
@@ -35,6 +36,7 @@ export default function Home() {
         </ContainerMain>
       </main>
       <Footer/> 
+      </BrowserRouter>
     </>
   )
 }

@@ -13,6 +13,7 @@ export const StyleContainerDashboard = styled.div`
     flex: 1;
 
     h2{
+        margin-top: 20px;
         font-size: var(--font-title-two);
         color: var(--brand-1);
         font-weight: 700;

@@ -1,9 +1,11 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Input } from '../../fragments/Input';
 import { StyleFormLogin } from './StyleFormLogin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TFormLoginSchema, formLoginSchema } from './schemaFormLogin';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ClientsContext } from '@/contexts/clients/clientsContext';
+import { useNavigate } from 'react-router-dom';
 
 
 interface IPropFormLogin {
@@ -12,7 +14,10 @@ interface IPropFormLogin {
 }
 
 export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
-    const [showPassword, setShowPassword] = useState(false);
+    const { loginClient } = useContext(ClientsContext);
+    const [showPassword, setShowPassword] = useState(false)
+    const routerForDashboard = useNavigate()
+
 
     const renderRegister = () => {
         setLoginRender(false)
@@ -23,20 +28,20 @@ export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
         resolver: zodResolver(formLoginSchema),
     })
     const loginSubmit: SubmitHandler<TFormLoginSchema> = (data) => {
-        console.log(data);
-        
+        routerForDashboard('/clients')
+        loginClient(data)
     }
 
     return (
         <StyleFormLogin>
             <h3>Faça o seu login</h3>
-            <form>
+            <form onSubmit={handleSubmit(loginSubmit)}>
                 <Input type="email" placeholder="Email" label="Email"  error={errors.email} {...register("email")}/>
                 <Input type={showPassword ? "text" : "password"} placeholder="Senha" label="Senha" error={errors.password} {...register("password")}/>
                 <div className="passwordView" >
                     <Input onChange={() => setShowPassword(!showPassword)} type="checkbox"label="Mostrar senha"/>
                 </div>
-                <button onClick={handleSubmit(loginSubmit)} type="submit">Entrar</button>
+                <button type="submit">Entrar</button>
             </form>
             <div className="login__register">
                 <p className="login__register--text">Ainda não possui uma conta?</p>

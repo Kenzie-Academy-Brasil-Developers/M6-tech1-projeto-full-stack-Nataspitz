@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Menu } from "@/components/menu/Menu";
 import { ContainerDashboard } from "@/components/containers/containerDashboard/ContainerDashboard";
 import { ContactList } from "@/components/lists/ContactsList/ContactList";
+import { Footer } from "@/components/footer/Footer";
 
 
 export default function ClientPage() {
@@ -28,6 +29,7 @@ export default function ClientPage() {
                     <ContactList />
                 </ContainerDashboard>
             </main>
+            <Footer />
         </>
     )
 }
