@@ -50,13 +50,10 @@ export class ContactServices{
         
           const contacts = await contactsRepo.find({
             where: whereConditions,
+            relations: {
+                emailContacts: true
+            }
           });
-        
-        // const contacts = await contactsRepo.find({
-        //     where: {
-        //         client: { id: clientId }
-        //     }
-        // })
 
         return contacts
 
