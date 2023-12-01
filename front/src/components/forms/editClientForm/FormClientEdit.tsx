@@ -15,7 +15,6 @@ export function FormClientEdit() {
     const {register, handleSubmit} = useForm()
     
     const editClientSubmit: SubmitHandler<IUpdateClient> = (data) => {
-        console.log(client, "client");
         updateClient(data)
         router.push('/clients')
     }
@@ -34,17 +33,16 @@ export function FormClientEdit() {
                 <h3>{`Olá, ${client?.fullName}...Edite seu dados agora`}</h3>
                 <p>Preencha apenas os dados que deseja mudar</p>
             </div>
-            <form onSubmit={handleSubmit(editClientSubmit)}>
+            <form className="edit__form" onSubmit={handleSubmit(editClientSubmit)}>
                 <Input defaultValue={client?.fullName} type="text" placeholder="Nome" {...register("fullName")} />
                 <Input defaultValue={client?.email} type="email" placeholder="Email" {...register("email")}/>
-                <Input defaultValue={"*********"} type="password" placeholder="Senha" {...register("password")}/>
                 <Input defaultValue={client?.phone} type="phone" placeholder="Telefone" {...register("phone")}/>
                 <button type="submit">Editar</button>
                 <Link href={"/clients"} className="button_cancel">Cancelar</Link>
             </form>
-            <div className="client__delete">
+            <div className="form__delete">
                 <p>Deseja excluir sua conta?</p>
-                <button className="button_delete" onClick={() => deleteClientEvent()}>Excluir</button>
+                <button onClick={() => deleteClientEvent()}>Excluir</button>
             </div>
         </StyleForms>
     )

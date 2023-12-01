@@ -7,7 +7,7 @@ import { GlobalStyles } from "@/styles/GlobalStyle";
 import { BrowserRouter } from "react-router-dom";
 
 
-export default function ClientProfile() {
+export default function ClientProfilePage() {
     return (
         <BrowserRouter>
             <ContactsProvider>

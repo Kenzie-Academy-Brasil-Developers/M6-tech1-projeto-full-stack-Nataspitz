@@ -1,11 +1,12 @@
 "use client"
 import { createContext, useState} from "react"
 import { api } from "../../../service/api"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
-import { TRegisterFormSchema } from "@/components/forms/register/schemaRegister"
+import { TRegisterFormSchema } from "@/components/forms/registerClientsForm/schemaRegister"
 import { IClient, IClientsContext, IUpdateClient } from "./interfaces"
-import { TFormLoginSchema } from "@/components/forms/login/schemaFormLogin"
+import { TFormLoginSchema } from "@/components/forms/loginForm/schemaFormLogin"
+import { Route } from "react-router-dom"
 
 
 export const ClientsContext = createContext<IClientsContext>(
@@ -18,7 +19,7 @@ export function ClientsProvider({ children }: {children: React.ReactNode }) {
 
     const token = localStorage.getItem("@TOKEN")
     const clientId = localStorage.getItem("@USERID")
-
+    const route = useRouter()
 
     const registerClient = async (form: TRegisterFormSchema) => {
         try {
@@ -37,10 +38,10 @@ export function ClientsProvider({ children }: {children: React.ReactNode }) {
             const { data } = await api.post("/clients/login", form)
             const clientId = data.id
             setClient(data)
-            console.log(data)
-            console.log(client)            
+          
             localStorage.setItem("@USERID", clientId)
             localStorage.setItem("@TOKEN", data.token)
+            route.push("/clients")
         } catch (error) {
             toast.error("Senha ou email incorretos!")
             console.log(error, "error");

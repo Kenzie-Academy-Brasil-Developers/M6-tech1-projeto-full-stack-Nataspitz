@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { api } from "../../../service/api";
 import { IContactContext, ICreateContact, IListContacts, IUpdateContact, IUpdateEmailContact } from "./interfaces";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 
 export const ContactsContext = createContext(
@@ -10,42 +11,63 @@ export const ContactsContext = createContext(
 
 export function ContactsProvider({ children }: { children: React.ReactNode }) {
     const [contactsRender, setContactsRender] = useState<IListContacts[]>([])
-
+    const router = useRouter()
+    
     const token = localStorage.getItem("@TOKEN")
-
+    
     const registerContact = async (form: ICreateContact) =>{
         try {
-            await api.post("/contacts", form), {
+            const { data } = await api.post("/contacts", form, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }
+            })
+            setContactsRender([...contactsRender, data])
             toast.success("Contato criado com sucesso")
+            router.push("/clients")
         } catch (error) {
             toast.error("Esse contato já foi cadastrado")
         }
     }
 
-    const listContacts = async () =>{
+    const listContacts = async (searchTerm?: string) =>{
         try {
             const { data } = await api.get("/contacts", {
                 headers: {
                     Authorization: `Bearer ${token}`
+                },
+                params: {
+                    searchTerm: searchTerm
                 }
-            })
+            })            
             setContactsRender(data)
         } catch (error) {
             toast.error("Não foi possivel listar os contatos")
+        }
+
+    }
+
+    const listContactById = async (contactId: string) =>{
+        try {
+            const { data } = await api.get(`/contacts/${contactId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            return data
+        } catch (error) {
+            toast.error("Esse contato não existe")
         }
     }
 
     const updateContact = async (contactId: string, form: IUpdateContact) =>{
         try {
-            await api.patch(`/contacts/${contactId}`, form), {
+            await api.patch(`/contacts/${contactId}`, form, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }
+            })
+            toast.success("Contato atualizado com sucesso")
         } catch (error) {
             toast.error("Esse contato não pode ser atualizado")
         }
@@ -72,6 +94,7 @@ export function ContactsProvider({ children }: { children: React.ReactNode }) {
                 }
             })
             toast.success("Contato deletado com sucesso")
+            router.push("/clients")
         } catch (error) {
             toast.error("Esse contato não Existe")
         }
@@ -97,7 +120,8 @@ export function ContactsProvider({ children }: { children: React.ReactNode }) {
         updateEmail,
         contactsRender,
         deleteContact,
-        deleteEmail
+        deleteEmail,
+        listContactById
     }
 
     return (

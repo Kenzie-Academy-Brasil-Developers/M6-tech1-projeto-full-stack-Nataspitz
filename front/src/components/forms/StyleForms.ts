@@ -20,6 +20,15 @@ export const StyleForms = styled.div`
     color: var(--brand-1);
   }
 
+  .edit__title{
+     display: flex;
+     flex-direction: column;
+
+        p{
+          font-size: var(--font-size-medium);
+        }
+   }
+
   form {
     display: flex;
     flex-direction: column;
@@ -79,37 +88,105 @@ export const StyleForms = styled.div`
       transform: scale(1.1);
     }
 
+    .button_cancel{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--grey-100);
+        font-size: var(--font-size-medium);
+        background-color: var(--brand-1);
+        width: 140px;
+        height: 30px;
+    }
+
+    .button_cancel:hover {
+        background-color: var(--brand-1-hover);
+        font-weight: 600;
+        transform: scale(1.1);
+    }
+
 }
 
-.login__register{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    .edit__form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    
+        input{
+          width: 90%;
+        }
+      
+    }
 
-    .login__register--text{
+    .create_form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    
+        input{
+          width: 90%;
+        }
+
+        label{
+          font-size: var(--font-size-medium);
+          font-weight: 500;
+        }
+      
+    }
+
+    .login__register{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    
+        .login__register--text{
+            font-size: var(--font-size-small);
+        }
+      
+        .login__register--link{
+            cursor: pointer;
+            font-size: var(--font-size-small);
+            color: var(--brand-1);
+        }
+    }
+
+    .register__login{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    
+        .register__login--text{
+            font-size: var(--font-size-small);
+        }
+      
+        .register__login--link{
+            cursor: pointer;
+            font-size: var(--font-size-small);
+            color: var(--brand-1);
+        }
+    }
+
+    .form__delete{
+        display: flex;
+        margin-top: 10px;
+        gap: 10px;
+
+    p{
         font-size: var(--font-size-small);
     }
 
-    .login__register--link{
+    button{
         cursor: pointer;
-        font-size: var(--font-size-small);
-        color: var(--brand-1);
-    }
-}
-
-.register__login{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    .register__login--text{
-        font-size: var(--font-size-small);
-    }
-
-    .register__login--link{
-        cursor: pointer;
-        font-size: var(--font-size-small);
-        color: var(--brand-1);
+        border: none;
+        background-color: red;
+        border-radius: 3px;
+        padding: 5px;
+        color: var(--grey-100);
     }
 }
 

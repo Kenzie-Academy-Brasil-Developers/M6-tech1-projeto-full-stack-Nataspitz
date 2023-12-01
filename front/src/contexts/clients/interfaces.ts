@@ -1,5 +1,5 @@
-import { TFormLoginSchema } from "@/components/forms/login/schemaFormLogin";
-import { TRegisterFormSchema } from "@/components/forms/register/schemaRegister";
+import { TFormLoginSchema } from "@/components/forms/loginForm/schemaFormLogin";
+import { TRegisterFormSchema } from "@/components/forms/registerClientsForm/schemaRegister";
 import { z } from "zod";
 
 

@@ -1,16 +1,14 @@
 "use client"
-import Image from 'next/image'
 import { Footer } from '../components/footer/Footer'
 import { ContainerMain } from '../components/containers/containerMain/ContainerMain'
-import logo from '../assets/imgs/Logo.png'
 import { GlobalStyles } from '../styles/GlobalStyle'
 import { ListHome } from '../components/lists/listHomePage/ListHome'
 import { useContext, useState } from 'react'
-import { FormRegister } from '@/components/forms/register/FormRegister'
+import { FormRegister } from '@/components/forms/registerClientsForm/FormRegister'
 import { Header } from '@/components/header/Header'
-import { FormLogin } from '@/components/forms/login/FormLogin'
+import { FormLogin } from '@/components/forms/loginForm/FormLogin'
 import { ClientsContext } from '@/contexts/clients/clientsContext'
-import { BrowserRouter } from 'react-router-dom'
+
 
 export default function Home() {
   const [registerRender, setRegisterRender] = useState(false)
@@ -19,7 +17,6 @@ export default function Home() {
   return (
     <>
       <GlobalStyles />
-      <BrowserRouter>
       <Header />
       <main>
         <ContainerMain>
@@ -36,7 +33,6 @@ export default function Home() {
         </ContainerMain>
       </main>
       <Footer/> 
-      </BrowserRouter>
     </>
   )
 }

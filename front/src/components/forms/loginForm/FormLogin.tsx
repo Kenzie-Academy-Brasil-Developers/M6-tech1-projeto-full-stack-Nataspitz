@@ -1,3 +1,4 @@
+"use client"
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Input } from '../../fragments/Input';
 import { StyleForms } from '../StyleForms';
@@ -5,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { TFormLoginSchema, formLoginSchema } from './schemaFormLogin';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ClientsContext } from '@/contexts/clients/clientsContext';
-import { useNavigate } from 'react-router-dom';
 import { useRouter } from 'next/navigation'; 
+import { ContactsContext } from '@/contexts/contacts/contactsContext';
 
 
 interface IPropFormLogin {
@@ -15,9 +16,9 @@ interface IPropFormLogin {
 }
 
 export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
-    const { loginClient } = useContext(ClientsContext);
+    const { loginClient } = useContext(ClientsContext)
+    const { listContacts } = useContext(ContactsContext)
     const [showPassword, setShowPassword] = useState(false)
-    const routerForDashboard = useRouter()
 
 
     const renderRegister = () => {
@@ -30,7 +31,7 @@ export function FormLogin({setRegisterRender, setLoginRender}: IPropFormLogin) {
     })
     const loginSubmit: SubmitHandler<TFormLoginSchema> = (data) => {
         loginClient(data)
-        routerForDashboard.push("/clients")
+        listContacts()
     }
 
     return (
