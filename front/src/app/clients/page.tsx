@@ -20,6 +20,8 @@ export default function ClientPage() {
 
     useEffect(() => {
         listContacts()
+        console.log("searchTerm", searchTerm);
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm]);
 
@@ -34,7 +36,7 @@ export default function ClientPage() {
                     {openMenu? <Menu/>:null}
                 <div className="header__search">
                     <Input type="search" placeholder="Pesquisar" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-                    <FaSearch onclick={() => searchContacts(searchTerm)}/>
+                    <FaSearch onClick={() => searchContacts(searchTerm)}/>
                 </div>
             </Header>
             <main>

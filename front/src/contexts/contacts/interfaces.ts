@@ -1,7 +1,7 @@
 
 export interface IContactContext {
     registerContact: (form: any) => void,
-    listContacts: () => void,
+    listContacts: (searchTerm?: string | undefined) => void,
     updateContact: (contactId: string, form: IUpdateContact) => void,
     updateEmail: (emailId: string, form: IUpdateEmailContact) => void,
     deleteContact: (contactId: string) => void,

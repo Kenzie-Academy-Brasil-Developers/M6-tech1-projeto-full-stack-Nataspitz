@@ -98,10 +98,10 @@ export const StyleContactsList = styled.section`
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        box-shadow: none;
         margin: 0;
-
+        
         li{
+            box-shadow: none;
             border: none;
             height: 20px;
             font-size: var(--font-size-small);

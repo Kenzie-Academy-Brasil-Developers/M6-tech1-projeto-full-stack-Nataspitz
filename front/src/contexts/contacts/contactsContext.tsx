@@ -37,9 +37,10 @@ export function ContactsProvider({ children }: { children: React.ReactNode }) {
                     Authorization: `Bearer ${token}`
                 },
                 params: {
-                    searchTerm: searchTerm
+                    name: searchTerm
                 }
-            })            
+            })
+            console.log(data)     
             setContactsRender(data)
         } catch (error) {
             toast.error("Não foi possivel listar os contatos")

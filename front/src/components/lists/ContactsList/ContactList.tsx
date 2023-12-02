@@ -77,7 +77,6 @@ export function ContactList() {
   const { contactsRender } = useContext(ContactsContext);  
   const [expandedContacts, setExpandedContacts] = useState<string[]>([]);
 
-  
 
   const toggleContactExpansion = (contactId: string) => {
     setExpandedContacts((prevExpanded) =>

@@ -69,6 +69,12 @@ export const GlobalStyles = createGlobalStyle`
   body {
     line-height: 1;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer{
+    margin-top: auto;
   }
 
   ol, ul {

@@ -28,7 +28,7 @@
 5. Rode as migrações:
 
     ```bash
-    npm run typeorm:run -- -d ./src/migrations
+    npm run typeorm migration:run -- -d ./src/data-source
     ```
 
 6. Coloque a API para rodar no seu banco de dados:
