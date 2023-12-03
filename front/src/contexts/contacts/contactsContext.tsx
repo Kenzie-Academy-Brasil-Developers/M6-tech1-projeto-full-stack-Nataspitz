@@ -43,7 +43,8 @@ export function ContactsProvider({ children }: { children: React.ReactNode }) {
             console.log(data)     
             setContactsRender(data)
         } catch (error) {
-            toast.error("Não foi possivel listar os contatos")
+           console.log(error);
+           
         }
 
     }
