@@ -66,7 +66,7 @@ Rode primeiro a API para não haver conflito de portaria, pós o servidor estive
 
 ## Testes do Back-end
 
-### Testes automáticos de relacionamento de favelas
+### Testes automáticos de relacionamento de tavelas
 
 1. Abra o terminal e acesse a pasta `back`:
 
