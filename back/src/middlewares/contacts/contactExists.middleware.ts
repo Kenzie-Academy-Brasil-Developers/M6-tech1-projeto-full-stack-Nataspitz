@@ -8,6 +8,6 @@ export const contactExists = async (req: Request, res: Response, next: NextFunct
     const { name } = req.body
 
     const contact = await contactsRepo.findOneBy({ name })
-    if(!contact) throw new AppError("Contact not found", 404)
+    if(contact) throw new AppError("Contact already exists", 404)
     return next()
 }

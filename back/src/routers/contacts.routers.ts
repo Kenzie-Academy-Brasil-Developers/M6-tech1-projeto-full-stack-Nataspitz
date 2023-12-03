@@ -6,11 +6,12 @@ import { contactController, emailContactController } from '../controllers';
 import { verifyToken } from '../middlewares/authentication/verifyToken.middleware';
 import { newEmailContactSchema } from '../schemas/emailContacts.schemas';
 import { notFoundContact } from '../middlewares/contacts/notFoundContacts.middleware';
+import { contactExists } from '../middlewares/contacts/contactExists.middleware';
 
 export const contactsRouter: Router = Router()
 
 contactsRouter.use(verifyToken)
-contactsRouter.post("/", validateBody(newContactSchema), (req, res) => {contactController.create(req, res)})
+contactsRouter.post("/", validateBody(newContactSchema), contactExists, (req, res) => {contactController.create(req, res)})
 contactsRouter.get("/", (req, res) => {contactController.getAll(req, res)})
 contactsRouter.post("/:id/email", notFoundContact, validateBody(newEmailContactSchema), (req, res) => {emailContactController.create(req, res)})
 
