@@ -85,14 +85,18 @@ export class ContactServices{
     }
 
     async delete (contact: Contact) {
-        const emails = await emailContactRepo.find({
+        const contactWithEmails = await contactsRepo.findOneOrFail({
             where: {
-                contact: contact.emailContacts
+                id: contact.id
+            },
+            relations: {
+                emailContacts: true
             }
         })
+        const { emailContacts } = contactWithEmails
 
-        if (emails) {
-            await emailContactRepo.remove(emails)
+        if (emailContacts) {
+            await emailContactRepo.remove(emailContacts)
         }
 
         await contactsRepo.remove(contact)
