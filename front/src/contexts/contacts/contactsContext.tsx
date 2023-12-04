@@ -13,7 +13,7 @@ export function ContactsProvider({ children }: { children: React.ReactNode }) {
     const [contactsRender, setContactsRender] = useState<IListContacts[]>([])
     const router = useRouter()
     
-    const token = localStorage.getItem("@TOKEN")
+    const token = typeof window !== 'undefined' ? localStorage.getItem("@TOKEN") : null;
     
     const registerContact = async (form: ICreateContact) =>{
         try {

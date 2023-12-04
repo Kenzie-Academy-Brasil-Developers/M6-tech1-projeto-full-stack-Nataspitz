@@ -17,8 +17,9 @@ export function ClientsProvider({ children }: {children: React.ReactNode }) {
     const [loginRender, setLoginRender] = useState(false)
     const [client, setClient] = useState<IClient | null>(null)
 
-    const token = localStorage.getItem("@TOKEN")
-    const clientId = localStorage.getItem("@USERID")
+    const token = typeof window !== 'undefined' ? localStorage.getItem("@TOKEN") : null;
+    const clientId = typeof window !== 'undefined' ? localStorage.getItem("@USERID") : null;
+    
     const route = useRouter()
 
     const registerClient = async (form: TRegisterFormSchema) => {
