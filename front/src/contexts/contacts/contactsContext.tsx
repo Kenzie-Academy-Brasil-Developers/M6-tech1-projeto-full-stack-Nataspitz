@@ -26,6 +26,7 @@ export function ContactsProvider({ children }: { children: React.ReactNode }) {
             toast.success("Contato criado com sucesso")
             router.push("/clients")
         } catch (error) {
+            console.log(error);
             toast.error("Esse contato já foi cadastrado")
         }
     }

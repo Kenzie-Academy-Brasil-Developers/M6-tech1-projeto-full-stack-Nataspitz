@@ -30,7 +30,7 @@ export function FormClientEdit() {
     return(
         <StyleForms>
             <div className="edit__title">
-                <h3>{`Olá, ${client?.fullName}...Edite seu dados agora`}</h3>
+                <h3>{`Olá, ${client?.fullName}...Edite seus dados agora`}</h3>
                 <p>Preencha apenas os dados que deseja mudar</p>
             </div>
             <form className="edit__form" onSubmit={handleSubmit(editClientSubmit)}>

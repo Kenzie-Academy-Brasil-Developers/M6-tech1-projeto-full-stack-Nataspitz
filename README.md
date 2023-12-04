@@ -16,7 +16,7 @@
 ## Executando o Projeto
 
 **Observação:**
-Rode primeiro a API para não haver conflito de portaria, pós o servidor estiver rodando faça o procedimento do Front
+Rode primeiro a API para não haver conflito de portaria, após o servidor estiver rodando faça o procedimento do Front
 
 1. Abra o terminal e acesse o PostgreSQL. Crie um banco de dados local do Postgres.
 
