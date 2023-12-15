@@ -1,10 +1,9 @@
 import { ContainerMain } from "../containers/containerMain/ContainerMain";
 import { StyleHeader } from "./StyleHeeader";
-import logo from "../../assets/imgs/logo.png"
+import logo from "../../assets/imgs/Logo.png"
 import Image from "next/image";
 import { IoMenu } from "react-icons/io5";
 import { CgClose } from "react-icons/cg";
-import { SetStateAction, } from "react";
 
 
 interface IHeaderProps {
