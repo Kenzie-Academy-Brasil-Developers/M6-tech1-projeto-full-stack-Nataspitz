@@ -6,19 +6,16 @@ import { ContactsProvider } from "@/contexts/contacts/contactsContext";
 import { GlobalStyles } from "@/styles/GlobalStyle";
 import { BrowserRouter } from "react-router-dom";
 
-
 export default function ClientProfilePage() {
-    return (
-        <BrowserRouter>
-            <ContactsProvider>
-                <GlobalStyles/>
-                <Header />
-                <main>
-                    <ContainerMain>
-                        <FormClientEdit />
-                    </ContainerMain>
-                </main>
-            </ContactsProvider>
-        </BrowserRouter>
-    )
+  return (
+    <ContactsProvider>
+      <GlobalStyles />
+      <Header />
+      <main>
+        <ContainerMain>
+          <FormClientEdit />
+        </ContainerMain>
+      </main>
+    </ContactsProvider>
+  );
 }
